@@ -9,8 +9,16 @@ import { apiLimiter } from "./middlewares/rateLimit"
 const PORT = process.env.PORT ?? 2222
 
 const app = express()
+const allowedOrigins = ['https://biblioteca-personal-frontend.vercel.app'];
 
-app.use(cors());
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+app.options('*', cors());
+
 
 // Middlewares de parsing
 app.use(express.json({ limit: "10mb" }))
