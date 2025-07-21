@@ -10,13 +10,7 @@ const PORT = process.env.PORT ?? 2222
 
 const app = express()
 
-// CORS debe ir ANTES de los middlewares de parsing
-app.use(
-  cors({
-    origin: ["http://localhost:5173", "http://localhost:3000"], // Permitir el frontend
-    credentials: true,
-  }),
-)
+app.use(cors());
 
 // Middlewares de parsing
 app.use(express.json({ limit: "10mb" }))
